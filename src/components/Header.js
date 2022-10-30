@@ -1,22 +1,29 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 const Navbar = ({ page }) => {
-
+    const navigate = useNavigate();
+    const onClick = ()=>{
+        localStorage.clear();
+        return navigate('/');
+    };
     return (
         <div>
             <div className="card text-center">
                 <div className="card-header">
                     <ul className="nav nav-tabs card-header-tabs">
                         <li className="nav-item">
-                            <Link className={`nav-link ${page == "Home" ? "active" : ""}`} aria-current="true" to={"/Home"}>Inicio</Link>
+                            <Link className={`nav-link ${page === "Home" ? "active" : ""}`} aria-current="true" to={"/Home"}>Inicio</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className={`nav-link ${page == "ListUsers" ? "active" : ""}`} to={"/Listu"}>Usarios</Link>
+                            <Link className={`nav-link ${page === "ListUsers" ? "active" : ""}`} to={"/Listu"}>Usarios</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className={`nav-link ${page == "ListTickets" ? "active" : ""}`} to={"/Listt"}>Tickets</Link>
+                            <Link className={`nav-link ${page === "ListTickets" ? "active" : ""}`} to={"/Listt"}>Tickets</Link>
                         </li>
+                        <li className="ms-xl-4 px-5"><button type="button" class="btn btn-primary" onClick={onClick}>Cerrar sesión</button></li>
                     </ul>
                     
                 </div>

@@ -1,12 +1,18 @@
-import { React} from "react";
-import {Link, useNavigate} from "react-router-dom";
+import { React } from "react";
+import { Navigate } from "react-router-dom";
 import Navbar from "../components/Header";
 import Footer from "../components/Footer";
 
 const Home = () => {
-    return (
-        <div>
-             <Navbar page={"Home"}/>
+    const idUsuario = localStorage.getItem("id_user");
+    if (idUsuario === null) {
+        return (
+            <Navigate to="/" replace={true} />
+        );
+    } else {
+        return (
+            <div>
+                <Navbar page={"Home"} />
                 <main className="flex-shrink-0">
                     <div className="container">
                         <h1 className="mt-5">Página principal ServiPlus.</h1>
@@ -17,10 +23,11 @@ const Home = () => {
 
                     </div>
                 </main>
-            <Footer />
+                <Footer />
 
-        </div>
-    );
+            </div>
+        );
+    }
 }
 
 export default Home;
