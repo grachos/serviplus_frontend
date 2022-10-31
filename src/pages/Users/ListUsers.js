@@ -36,7 +36,7 @@ const ListUsers = () => {
             if (regDelete) {
                 swal("El registro ha sido eliminado con exito", {icon: "success"});
                 const response = APIInvoke.invokeDELETE("/tickets/deluser/"+id);
-                console.log(response.msg); 
+                console.log(response); 
                 showUsers();
             } else {
                 swal("No se eliminó el registro!");

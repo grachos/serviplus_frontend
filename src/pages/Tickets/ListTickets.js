@@ -8,6 +8,7 @@ import { Link, Navigate } from "react-router-dom";
 import Navbar from "../../components/Header";
 import Footer from "../../components/Footer";
 import APIInvoke from "../../utils/APIInvoke";
+import swal from "sweetalert";
 
 const ListTickets = () => {
 
@@ -22,6 +23,27 @@ const ListTickets = () => {
     useEffect(() => {
         showTickets()
     }, []);
+
+    const deleteTicket=  async (e, idTicket) =>{
+        e.preventDefault(); 
+        await swal({
+            title: "¿Está seguro de eliminar el registro?",
+            text: "Una vez eliminado, no podrá recuperar el registro!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((regDelete) => {
+            if (regDelete) {
+                swal("El registro ha sido eliminado con exito", {icon: "success"});
+                const response = APIInvoke.invokeDELETE("/tickets/delticket/"+idTicket);
+                console.log(response); 
+                showTickets();
+            } else {
+                swal("No se eliminó el registro!");
+            }
+          });
+    }
 
     const idUsuario = localStorage.getItem("id_user");
     
@@ -80,9 +102,8 @@ const ListTickets = () => {
                                                                                 to={"#"}
                                                                             >Actualizar</Link>
                                                                             <button
-                                                                                type="button"
                                                                                 className="btn btn-outline-danger"
-                                                                                onClick={"#"}
+                                                                                onClick={(e)=>deleteTicket(e, iticket.idticket)}
                                                                             > Eliminar</button>
                                                                         </div>
                                                                     </td>
