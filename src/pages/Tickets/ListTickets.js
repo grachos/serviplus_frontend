@@ -24,29 +24,29 @@ const ListTickets = () => {
         showTickets()
     }, []);
 
-    const deleteTicket=  async (e, idTicket) =>{
-        e.preventDefault(); 
+    const deleteTicket = async (e, idTicket) => {
+        e.preventDefault();
         await swal({
             title: "¿Está seguro de eliminar el registro?",
             text: "Una vez eliminado, no podrá recuperar el registro!",
             icon: "warning",
             buttons: true,
             dangerMode: true,
-          })
-          .then((regDelete) => {
-            if (regDelete) {
-                swal("El registro ha sido eliminado con exito", {icon: "success"});
-                const response = APIInvoke.invokeDELETE("/tickets/delticket/"+idTicket);
-                console.log(response); 
-                showTickets();
-            } else {
-                swal("No se eliminó el registro!");
-            }
-          });
+        })
+            .then((regDelete) => {
+                if (regDelete) {
+                    swal("El registro ha sido eliminado con exito", { icon: "success" });
+                    const response = APIInvoke.invokeDELETE("/tickets/delticket/" + idTicket);
+                    console.log(response);
+                    showTickets();
+                } else {
+                    swal("No se eliminó el registro!");
+                }
+            });
     }
 
     const idUsuario = localStorage.getItem("id_user");
-    
+
     if (idUsuario === null) {
         return (
             <Navigate to="/" replace={true} />
@@ -95,16 +95,18 @@ const ListTickets = () => {
                                                                     <td className="col-md-1">{iticket.ticketstatus}</td>
                                                                     <td className="col-md-1">{iticket.startdate}</td>
                                                                     <td className="col-md-1">{iticket.finishdate}</td>
-                                                                    <td className="col-md-3">
+                                                                    <td className="col-md-2">
                                                                         <div>
-                                                                            <Link className="btn btn-outline-primary">Crear</Link>
-                                                                            <Link className="btn btn-outline-success mx-3"
-                                                                                to={"#"}
-                                                                            >Actualizar</Link>
-                                                                            <button
-                                                                                className="btn btn-outline-danger"
-                                                                                onClick={(e)=>deleteTicket(e, iticket.idticket)}
-                                                                            > Eliminar</button>
+                                                                            <div className="btn-group" role="group" aria-label="Basic example">
+                                                                                <button className="btn btn-outline-primary">Crear</button>
+                                                                                <button className="btn btn-outline-success mx-3"
+                                                                                    to={"#"}
+                                                                                >Actualizar</button>
+                                                                                <button
+                                                                                    className="btn btn-outline-danger"
+                                                                                    onClick={(e) => deleteTicket(e, iticket.idticket)}
+                                                                                > Eliminar</button>
+                                                                            </div>
                                                                         </div>
                                                                     </td>
                                                                 </tr>

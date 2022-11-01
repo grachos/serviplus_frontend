@@ -23,26 +23,26 @@ const ListUsers = () => {
         showUsers()
     }, []);
 
-    const deleteUser =  async (e, id) =>{
-        e.preventDefault(); 
+    const deleteUser = async (e, id) => {
+        e.preventDefault();
         await swal({
             title: "¿Está seguro de eliminar el registro?",
             text: "Una vez eliminado, no podrá recuperar el registro!",
             icon: "warning",
             buttons: true,
             dangerMode: true,
-          })
-          .then((regDelete) => {
-            if (regDelete) {
-                swal("El registro ha sido eliminado con exito", {icon: "success"});
-                const response = APIInvoke.invokeDELETE("/tickets/deluser/"+id);
-                console.log(response); 
-                showUsers();
-            } else {
-                swal("No se eliminó el registro!");
-            }
-          });
-        
+        })
+            .then((regDelete) => {
+                if (regDelete) {
+                    swal("El registro ha sido eliminado con exito", { icon: "success" });
+                    const response = APIInvoke.invokeDELETE("/tickets/deluser/" + id);
+                    console.log(response);
+                    showUsers();
+                } else {
+                    swal("No se eliminó el registro!");
+                }
+            });
+
     }
 
     const idUsuario = localStorage.getItem("id_user");
@@ -79,13 +79,15 @@ const ListUsers = () => {
                                                 <td>{item.typeroll}</td>
                                                 <td>
                                                     <div>
-                                                        <Link className="btn btn-outline-success mx-3"
-                                                            to={"#"}
-                                                        >Actualizar</Link>
-                                                        <button
-                                                            className="btn btn-outline-danger"
-                                                            onClick={(e)=> deleteUser(e, item._id)}
-                                                        > Eliminar</button>
+                                                        <div className="btn-group" role="group" aria-label="Basic example">
+                                                            <button className="btn btn-outline-success mx-3"
+                                                                to={"#"}
+                                                            >Actualizar</button>
+                                                            <button
+                                                                className="btn btn-outline-danger"
+                                                                onClick={(e) => deleteUser(e, item._id)}
+                                                            > Eliminar</button>
+                                                        </div>
                                                     </div>
                                                 </td>
                                             </tr>
