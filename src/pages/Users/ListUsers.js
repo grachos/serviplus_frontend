@@ -4,7 +4,7 @@ import {
     useState
 } from "react";
 
-import { Link, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import APIInvoke from "../../utils/APIInvoke";
 import Navbar from "../../components/Header";
 import Footer from "../../components/Footer";
