@@ -71,21 +71,21 @@ const ListUsers = () => {
                                 <div className="col">Acciones</div>
                             </div>
                             {users.map(
-                                    (item, index) =>
-                                    <div className={`row text-dark bg-opacity-10 p-2 rounded-2 ${(index % 2) === 0 ? "bg-success " : ""}`}>
+                                (item, index) =>
+                                    <div key={index} className={`row text-dark bg-opacity-10 p-2 rounded-2 ${(index % 2) === 0 ? "bg-success " : ""}`}>
                                         <div className="col">{item._id}</div>
                                         <div className="col">{item.name}</div>
                                         <div className="col">{item.email}</div>
                                         <div className="col">{item.typeroll}</div>
                                         <div className="col">
                                             <div className="btn-group" role="group" aria-label="Basic example">
-                                                    <Link className="btn btn-outline-success mx-0"
-                                                        to={`/Editu/${item._id}`}
-                                                    >Actualizar</Link>
-                                                    <button
-                                                        className="btn btn-outline-danger"
-                                                        onClick={(e) => deleteUser(e, item._id)}
-                                                    > Eliminar</button>
+                                                <Link className="btn btn-outline-success mx-0"
+                                                    to={`/Editu/${item._id}`}
+                                                >Actualizar</Link>
+                                                <button
+                                                    className="btn btn-outline-danger"
+                                                    onClick={(e) => deleteUser(e, item._id)}
+                                                > Eliminar</button>
                                             </div>
                                         </div>
                                     </div>

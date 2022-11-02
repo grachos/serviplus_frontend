@@ -188,7 +188,7 @@ const Register = () => {
                                                                 onChange={onChange} 
                                                                 value={roleType}
                                                             >
-                                                                <option selected value="">Tipo de role</option>
+                                                                <option defaultValue="">Tipo de role</option>
                                                                 <option value="Cliente">Cliente</option>
                                                                 <option value="Analista">Analista</option>
                                                                 <option value="Soporte">Soporte</option>

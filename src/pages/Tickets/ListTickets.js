@@ -65,7 +65,7 @@ const ListTickets = () => {
                         <div id="accordion">
                             {tickets.map(
                                 (item, index) =>
-                                    <div className="card">
+                                    <div key={index} className="card">
                                         <div className="card-header">
                                             <Link className={`fw-bolder ${index === 0 ? "btn" : "collapsed btn"}`} data-bs-toggle="collapse" to={`#listed${index}`}>
                                                 Usuario: {item.email} : {item.name}
@@ -85,7 +85,7 @@ const ListTickets = () => {
                                             </div>
                                             {item.ticketsset.map(
                                                 (iticket, index2) =>
-                                                    <div className={`row text-dark bg-opacity-10 p-2 rounded-2 ${(index2 % 2) === 0 ? "bg-success " : ""}`}>
+                                                    <div key={index2} className={`row text-dark bg-opacity-10 p-2 rounded-2 ${(index2 % 2) === 0 ? "bg-success " : ""}`}>
                                                         <div className="col">{iticket.idticket}</div>
                                                         <div className="col">{iticket.typerequest}</div>
                                                         <div className="col">{iticket.ticketdescript}</div>

@@ -10,33 +10,32 @@ const EditUser = () => {
 
     const { id } = useParams();
 
-    const [users, setUser] = useState([{
-        _id:"", name:"", email:"", typeroll:"" 
+    const [users, setUsers] = useState([{
     }]);
-
     const { _id, name, email, typeroll } = users;
 
-    const showData = async () => {
-        const response = await APIInvoke.invokeGET("/tickets/finduser/" + id);
-        console.log(response);
-        setUser(response);
-    }
+    
 
     useEffect(() => {
+        const showData = async () => {
+            const response = await APIInvoke.invokeGET("/tickets/finduser/" + id);
+            console.log(response);
+            setUsers(response);
+        }
         document.getElementById("email").focus();
         document.getElementById("_id").value = users[0]._id;
         document.getElementById("name").value = users[0].name;
         document.getElementById("email").value = users[0].email;
         document.getElementById("typeroll").value = users[0].typeroll;
         showData();
-    }, [users]);
+    }, [users[0]._id, id]);
 
 
     const onChange = (e) => {
-        setUser({
+       setUsers({
             ...users,
             [e.target.name]: e.target.value
-        });
+        })
     }
 
     const editUser = async () => {
@@ -53,7 +52,7 @@ const EditUser = () => {
     const onSubmit = (e) => {
         e.preventDefault();
         swal({
-            title: "¿Está seguro de eliminar el registro?",
+            title: "¿Está seguro de actualizar el registro?",
             text: "Una vez editado, no podrá deshacer los cambios!",
             icon: "warning",
             buttons: true,
@@ -85,6 +84,7 @@ const EditUser = () => {
                                 readOnly
                                 name="_id"
                                 value={_id}
+                                ref={email}
                             />
                         </div>
                         <div className="col-md-5">
@@ -96,6 +96,7 @@ const EditUser = () => {
                                 name="email"
                                 value={email}
                                 onChange={onChange}
+                                ref={email}
                                 placeholder="usuario@dominio.com" />
                         </div>
                         <div className="col-10">
@@ -105,6 +106,7 @@ const EditUser = () => {
                                 className="form-control"
                                 id="name"
                                 value={name}
+                                ref={email}
                                 name="name"
                                 onChange={onChange}
                             />
