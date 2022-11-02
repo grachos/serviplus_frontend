@@ -61,59 +61,51 @@ const ListTickets = () => {
                         <p className="lead">Lista de tickets por usuario.</p>
                     </div>
 
-                    <div className="container mt-3">
+                    <div className="container mt-3 p-4">
                         <div id="accordion">
                             {tickets.map(
                                 (item, index) =>
                                     <div className="card">
                                         <div className="card-header">
-                                            <Link className={`${index === 0 ? "btn" : "collapsed btn"}`} data-bs-toggle="collapse" to={`#listed${index}`}>
-                                                Usuario: {item._id} : {item.name}
+                                            <Link className={`fw-bolder ${index === 0 ? "btn" : "collapsed btn"}`} data-bs-toggle="collapse" to={`#listed${index}`}>
+                                                Usuario: {item.email} : {item.name}
                                             </Link>
                                         </div>
                                         <div id={`listed${index}`} className={`${index === 0 ? "collapse show" : "collapse"}`} data-bs-parent="#accordion">
-                                            <div className="card-body">
-                                                <table className="table table-striped table-hover">
-                                                    <thead className="table-primary">
-                                                        <tr>
-                                                            <th scope="col">Id</th>
-                                                            <th scope="col">Requerimiento</th>
-                                                            <th scope="col">Descripción</th>
-                                                            <th scope="col">Estatus</th>
-                                                            <th scope="col">Fecha Inicio</th>
-                                                            <th scope="col">Fecha Fin</th>
-                                                            <th> Acciones </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        {item.ticketsset.map(
-                                                            iticket =>
-                                                                <tr>
-                                                                    <td className="col-md-1">{iticket.idticket}</td>
-                                                                    <td className="col-md-1">{iticket.typerequest}</td>
-                                                                    <td className="col-md-2">{iticket.ticketdescript}</td>
-                                                                    <td className="col-md-1">{iticket.ticketstatus}</td>
-                                                                    <td className="col-md-1">{iticket.startdate}</td>
-                                                                    <td className="col-md-1">{iticket.finishdate}</td>
-                                                                    <td className="col-md-2">
-                                                                        <div>
-                                                                            <div className="btn-group" role="group" aria-label="Basic example">
-                                                                                <button className="btn btn-outline-primary">Crear</button>
-                                                                                <button className="btn btn-outline-success mx-3"
-                                                                                    to={"#"}
-                                                                                >Actualizar</button>
-                                                                                <button
-                                                                                    className="btn btn-outline-danger"
-                                                                                    onClick={(e) => deleteTicket(e, iticket.idticket)}
-                                                                                > Eliminar</button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                        )}
-                                                    </tbody>
-                                                </table>
+
+                                            <div className="row row-cols-7 bg-primary text-white rounded-2 p-2 justify-content-around">
+
+                                                <div className="col">Id</div>
+                                                <div className="col">Requerimiento</div>
+                                                <div className="col">Descripción</div>
+                                                <div className="col">Estatus</div>
+                                                <div className="col">Fecha Inicio</div>
+                                                <div className="col">Fecha Fin</div>
+                                                <div className="col">Acciones</div>
                                             </div>
+                                            {item.ticketsset.map(
+                                                (iticket, index2) =>
+                                                    <div className={`row text-dark bg-opacity-10 p-2 rounded-2 ${(index2 % 2) === 0 ? "bg-success " : ""}`}>
+                                                        <div className="col">{iticket.idticket}</div>
+                                                        <div className="col">{iticket.typerequest}</div>
+                                                        <div className="col">{iticket.ticketdescript}</div>
+                                                        <div className="col">{iticket.ticketstatus}</div>
+                                                        <div className="col">{iticket.startdate}</div>
+                                                        <div className="col">{iticket.finishdate}</div>
+                                                        <div className="col">
+                                                            <div className="btn-group" role="group" aria-label="Basic example">
+                                                                <button className="btn btn-outline-primary">Crear</button>
+                                                                <button className="btn btn-outline-success mx-0"
+                                                                    to={"#"}
+                                                                >Actualizar</button>
+                                                                <button
+                                                                    className="btn btn-outline-danger"
+                                                                    onClick={(e) => deleteTicket(e, iticket.idticket)}
+                                                                > Eliminar</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            )}
                                         </div>
                                     </div>
                             )}

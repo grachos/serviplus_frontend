@@ -23,7 +23,7 @@ const Navbar = ({ page }) => {
                         <li className="nav-item">
                             <Link className={`nav-link ${page === "ListTickets" ? "active" : ""}`} to={"/Listt"}>Tickets</Link>
                         </li>
-                        <li className="ms-xl-4 px-5"><button type="button" class="btn btn-primary" onClick={onClick}>Cerrar sesión</button></li>
+                        <li className="ms-xl-4 px-5"><button type="button" className="btn btn-primary" onClick={onClick}>Cerrar sesión</button></li>
                     </ul>
                     
                 </div>
