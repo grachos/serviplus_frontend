@@ -6,7 +6,7 @@ import Register from './pages/auth/Register';
 import Home from './pages/Home';
 import ListTickets from "./pages/Tickets/ListTickets";
 import ListUsers from "./pages/Users/ListUsers";
-import EditUser from './pages/Users/EditUser';
+import UpdateUser from './pages/Users/UpdateUser';
 
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
         <Route path='/Home' exact element={<Home/>} />
         <Route path="/Listu" exact element={<ListUsers/>}/>
         <Route path="/Listt" exact element={<ListTickets/>}/>
-        <Route path="/Editu/:id" exact element={<EditUser/>}/>
+        <Route path="/UpdateUser/:id" exact element={<UpdateUser/>}/>
       </Routes>
     </Router>
   </Fragment>

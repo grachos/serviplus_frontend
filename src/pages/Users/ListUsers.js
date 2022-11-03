@@ -39,7 +39,6 @@ const ListUsers = () => {
                     swal("El registro ha sido eliminado con exito", { icon: "success" });
                     const response = APIInvoke.invokeDELETE("/tickets/deluser/" + id);
                     console.log(response);
-                    showUsers();
                 } else {
                     swal("No se eliminó el registro!");
                 }
@@ -80,7 +79,7 @@ const ListUsers = () => {
                                         <div className="col">
                                             <div className="btn-group" role="group" aria-label="Basic example">
                                                 <Link className="btn btn-outline-success mx-0"
-                                                    to={`/Editu/${item._id}`}
+                                                    to={`/UpdateUser/${item._id}`}
                                                 >Actualizar</Link>
                                                 <button
                                                     className="btn btn-outline-danger"

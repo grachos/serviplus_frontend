@@ -16,7 +16,7 @@ const ListTickets = () => {
 
     const showTickets = async () => {
         const response = await APIInvoke.invokeGET("/tickets/ticketlist")
-        console.log(response);
+        //console.log(response);
         setTikets(response);
     }
 
