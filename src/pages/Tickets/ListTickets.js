@@ -15,8 +15,7 @@ const ListTickets = () => {
     const [tickets, setTikets] = useState([]);
 
     const showTickets = async () => {
-        const response = await APIInvoke.invokeGET("/tickets/ticketlist")
-        //console.log(response);
+        const response = await APIInvoke.invokeGET("/tickets/ticketlist");
         setTikets(response);
     }
 
@@ -36,8 +35,7 @@ const ListTickets = () => {
             .then((regDelete) => {
                 if (regDelete) {
                     swal("El registro ha sido eliminado con exito", { icon: "success" });
-                    const response = APIInvoke.invokeDELETE("/tickets/delticket/" + idTicket);
-                    console.log(response);
+                    APIInvoke.invokeDELETE("/tickets/delticket/" + idTicket);
                     showTickets();
                 } else {
                     swal("No se eliminó el registro!");

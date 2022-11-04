@@ -15,7 +15,6 @@ const ListUsers = () => {
 
     const showUsers = async () => {
         const response = await APIInvoke.invokeGET("/tickets/userlist")
-        console.log(response);
         setUsers(response);
     }
 
@@ -37,8 +36,7 @@ const ListUsers = () => {
             .then((regDelete) => {
                 if (regDelete) {
                     swal("El registro ha sido eliminado con exito", { icon: "success" });
-                    const response = APIInvoke.invokeDELETE("/tickets/deluser/" + id);
-                    console.log(response);
+                    APIInvoke.invokeDELETE("/tickets/deluser/" + id);
                 } else {
                     swal("No se eliminó el registro!");
                 }

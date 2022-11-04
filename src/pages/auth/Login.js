@@ -42,6 +42,7 @@ const Login = () => {
         const respon_b = response.msg;
 
         if (respon_b === "disable"){
+            console.clear();
             message("Denegado el acceso. Verifique su información",  "error", "ServiPlus");
             SetUsers({
                 email : "",

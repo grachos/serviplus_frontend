@@ -15,7 +15,6 @@ const UpdateUser = () => {
     useEffect(() => {
         const loadUser = async () => {
             const response = await APIInvoke.invokeGET("/tickets/finduser/" + id);
-            console.log(response);
             setUser(response);
         }
         loadUser();
@@ -34,9 +33,7 @@ const UpdateUser = () => {
             .then((regUpdate) => {
                 if (regUpdate) {
                     swal("El registro ha editado con exito", { icon: "success" });
-
-                    const response = APIInvoke.invokePUT("/tickets/updateuser/" + id, data);
-                    console.log(response);
+                    APIInvoke.invokePUT("/tickets/updateuser/" + id, data);
                 } else {
                     swal("No se editó el registro!");
                 }
@@ -82,6 +79,7 @@ const UpdateUser = () => {
                                             {...register("email")}
                                             placeholder="usuario@dominio.com"
                                             defaultValue={item.email}
+                                            autoFocus
                                         />
                                     </div>
                                     <div className="col-10">

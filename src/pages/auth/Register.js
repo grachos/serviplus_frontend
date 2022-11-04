@@ -89,10 +89,10 @@ const Register = () => {
                 passwd : input.password,
                 typeroll: input.roleType
             };
-            console.log(data);
             const response = await APIInvoke.invokePOST("/tickets/newuser",data)
             if (response.msg === "disable"){
                 message("El usaurio ya existe.", "error", "ServiPlus.");
+                console.clear();
             }
             else{
                 
@@ -108,7 +108,6 @@ const Register = () => {
     const onSubmit = (e) => {
         e.preventDefault();
         createRegister();
-        /*logingUser();*/
     }
 
 
