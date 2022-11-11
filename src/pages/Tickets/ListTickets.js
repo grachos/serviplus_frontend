@@ -80,7 +80,7 @@ const ListTickets = () => {
                                             <div className="col">Estatus</div>
                                             <div className="col">Fecha Inicio</div>
                                             <div className="col">Fecha Fin</div>
-                                            <div className="col-5">Acciones</div>
+                                            <div className="col"></div>
                                         </div>
 
                                         {item.ticketsset.map(
@@ -92,24 +92,33 @@ const ListTickets = () => {
                                                     <div className="col">{iticket.ticketstatus}</div>
                                                     <div className="col">{iticket.startdate}</div>
                                                     <div className="col">{iticket.finishdate}</div>
-                                                    <div className="col-5">
-                                                        <div className="btn-group" role="group" aria-label="Basic example">
-                                                            <button className="btn btn-outline-primary">
-                                                                <img className="img-fluid" src="../icons8-create-order-32.png" alt="Crea" />
-                                                            </button>
-                                                            <Link
-                                                                className="btn btn-outline-success mx-0"
-                                                                to={`/Updateticket/${iticket.idticket}`} alt="Actualiza"
-                                                            ><img className="img-fluid" src="../icons8-edit-property-32.png" alt="Actualiza" /></Link>
-                                                            <Link className="btn btn-outline-success mx-0" >
-                                                               <img className="img-fluid" src="../icons8-add-tag-32.png" alt="Asigna" />
-                                                            </Link>
-                                                            <button type="submit"
-                                                                className="btn btn-outline-danger"
-                                                                onClick={(e) => deleteTicket(e, iticket.idticket)}
-                                                            ><img className="img-fluid" src="../icons8-delete-document-32.png" alt="Elimina" /></button>
+                                                    <div className="col">
+                                                        <Link className="btn btn-primary" type="button" data-bs-toggle="collapse" to={`#colapsed${index2}`} aria-expanded="false" aria-controls={`colapsed${index2}`}>
+                                                            Acciones
+                                                        </Link>
+                                                    </div>
+
+                                                    <div className="collapse" id={`colapsed${index2}`}>
+                                                        <div className="card card-body">
+                                                            <div className="btn-group" role="group" aria-label="Basic example">
+                                                                <button className="btn btn-outline-primary">
+                                                                    <img  src="../icons8-create-order-32.png" alt="Crea" />
+                                                                </button>
+                                                                <Link
+                                                                    className="btn btn-outline-success mx-0"
+                                                                    to={`/Updateticket/${iticket.idticket}`} alt="Actualiza"
+                                                                ><img  src="../icons8-edit-property-32.png" alt="Actualiza" /></Link>
+                                                                <Link className="btn btn-outline-success mx-0" >
+                                                                    <img  src="../icons8-add-tag-32.png" alt="Asigna" />
+                                                                </Link>
+                                                                <button type="submit"
+                                                                    className="btn btn-outline-danger"
+                                                                    onClick={(e) => deleteTicket(e, iticket.idticket)}
+                                                                ><img src="../icons8-delete-document-32.png" alt="Elimina" /></button>
+                                                            </div>
                                                         </div>
                                                     </div>
+
                                                 </div>
                                         )}
 
@@ -118,9 +127,9 @@ const ListTickets = () => {
                             )}
                         </div>
                     </div>
-                </main>
+                </main >
                 <Footer />
-            </div>
+            </div >
         );
     }
 }
