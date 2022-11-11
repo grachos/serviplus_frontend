@@ -95,19 +95,19 @@ const ListTickets = () => {
                                                     <div className="col-5">
                                                         <div className="btn-group" role="group" aria-label="Basic example">
                                                             <button className="btn btn-outline-primary">
-                                                                <img src="../icons8-create-order-32.png" alt="Crea" />
+                                                                <img className="img-fluid" src="../icons8-create-order-32.png" alt="Crea" />
                                                             </button>
                                                             <Link
                                                                 className="btn btn-outline-success mx-0"
                                                                 to={`/Updateticket/${iticket.idticket}`} alt="Actualiza"
-                                                            ><img src="../icons8-edit-property-32.png" alt="Actualiza" /></Link>
+                                                            ><img className="img-fluid" src="../icons8-edit-property-32.png" alt="Actualiza" /></Link>
                                                             <Link className="btn btn-outline-success mx-0" >
-                                                               <img src="../icons8-add-tag-32.png" alt="Asigna" />
+                                                               <img className="img-fluid" src="../icons8-add-tag-32.png" alt="Asigna" />
                                                             </Link>
                                                             <button type="submit"
                                                                 className="btn btn-outline-danger"
                                                                 onClick={(e) => deleteTicket(e, iticket.idticket)}
-                                                            ><img src="../icons8-delete-document-32.png" alt="Elimina" /></button>
+                                                            ><img className="img-fluid" src="../icons8-delete-document-32.png" alt="Elimina" /></button>
                                                         </div>
                                                     </div>
                                                 </div>
