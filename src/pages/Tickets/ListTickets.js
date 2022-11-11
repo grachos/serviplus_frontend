@@ -80,7 +80,7 @@ const ListTickets = () => {
                                             <div className="col">Estatus</div>
                                             <div className="col">Fecha Inicio</div>
                                             <div className="col">Fecha Fin</div>
-                                            <div className="col-3">Acciones</div>
+                                            <div className="col-4">Acciones</div>
                                         </div>
 
                                         {item.ticketsset.map(
@@ -92,7 +92,7 @@ const ListTickets = () => {
                                                     <div className="col">{iticket.ticketstatus}</div>
                                                     <div className="col">{iticket.startdate}</div>
                                                     <div className="col">{iticket.finishdate}</div>
-                                                    <div className="col-3">
+                                                    <div className="col-4">
                                                         <div className="btn-group" role="group" aria-label="Basic example">
                                                             <button className="btn btn-outline-primary">
                                                                 <img src="../icons8-create-order-32.png" alt="Crea" />
