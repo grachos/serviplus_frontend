@@ -9,6 +9,7 @@ import Navbar from "../../components/Header";
 import Footer from "../../components/Footer";
 import APIInvoke from "../../utils/APIInvoke";
 import swal from "sweetalert";
+//import { useForm } from "react-hook-form";
 
 const ListTickets = () => {
 
@@ -43,6 +44,7 @@ const ListTickets = () => {
             });
     }
 
+    //Local storage that silulates a start session
     const idUsuario = localStorage.getItem("id_user");
 
     if (idUsuario === null) {
@@ -61,55 +63,56 @@ const ListTickets = () => {
 
                     <div className="container mt-3 p-4">
                         <div id="accordion">
-                            {tickets.map(
-                                (item, index) =>
-                                    <div key={index} className="card">
-                                        <div className="card-header">
-                                            <Link className={`fw-bolder ${index === 0 ? "btn" : "collapsed btn"}`} data-bs-toggle="collapse" to={`#listed${index}`}>
-                                                Usuario: {item.email} : {item.name}
-                                            </Link>
+                            {tickets.map((item, index) =>
+                                <div key={index} className="card">
+                                    <div className="card-header">
+                                        <Link className={`fw-bolder ${index === 0 ? "btn" : "collapsed btn"}`} data-bs-toggle="collapse" to={`#listed${index}`}>
+                                            Usuario: {item.email} : {item.name}
+                                        </Link>
+                                    </div>
+                                    <div id={`listed${index}`} className={`${index === 0 ? "collapse show" : "collapse"}`} data-bs-parent="#accordion">
+
+                                        <div className="row row-cols-7 bg-primary text-white rounded-2 p-2 justify-content-around">
+
+                                            <div className="col">Id</div>
+                                            <div className="col">Requerimiento</div>
+                                            <div className="col">Descripción</div>
+                                            <div className="col">Estatus</div>
+                                            <div className="col">Fecha Inicio</div>
+                                            <div className="col">Fecha Fin</div>
+                                            <div className="col">Acciones</div>
                                         </div>
-                                        <div id={`listed${index}`} className={`${index === 0 ? "collapse show" : "collapse"}`} data-bs-parent="#accordion">
 
-                                            <div className="row row-cols-7 bg-primary text-white rounded-2 p-2 justify-content-around">
-
-                                                <div className="col">Id</div>
-                                                <div className="col">Requerimiento</div>
-                                                <div className="col">Descripción</div>
-                                                <div className="col">Estatus</div>
-                                                <div className="col">Fecha Inicio</div>
-                                                <div className="col">Fecha Fin</div>
-                                                <div className="col">Acciones</div>
-                                            </div>
-                                            {item.ticketsset.map(
-                                                (iticket, index2) =>
-                                                    <div key={index2} className={`row text-dark bg-opacity-10 p-2 rounded-2 ${(index2 % 2) === 0 ? "bg-success " : ""}`}>
-                                                        <div className="col">{iticket.idticket}</div>
-                                                        <div className="col">{iticket.typerequest}</div>
-                                                        <div className="col">{iticket.ticketdescript}</div>
-                                                        <div className="col">{iticket.ticketstatus}</div>
-                                                        <div className="col">{iticket.startdate}</div>
-                                                        <div className="col">{iticket.finishdate}</div>
-                                                        <div className="col">
-                                                            <div className="btn-group" role="group" aria-label="Basic example">
-                                                                <button className="btn btn-outline-primary">Crear</button>
-                                                                <button className="btn btn-outline-success mx-0"
-                                                                    to={"#"}
-                                                                >Actualizar</button>
-                                                                <button
-                                                                    className="btn btn-outline-danger"
-                                                                    onClick={(e) => deleteTicket(e, iticket.idticket)}
-                                                                > Eliminar</button>
-                                                            </div>
+                                        {item.ticketsset.map(
+                                            (iticket, index2) =>
+                                                <div key={index2} className={`row text-dark bg-opacity-10 p-2 rounded-2 ${(index2 % 2) === 0 ? "bg-success " : ""}`}>
+                                                    <div className="col">{iticket.idticket}</div>
+                                                    <div className="col">{iticket.typerequest}</div>
+                                                    <div className="col">{iticket.ticketdescript}</div>
+                                                    <div className="col">{iticket.ticketstatus}</div>
+                                                    <div className="col">{iticket.startdate}</div>
+                                                    <div className="col">{iticket.finishdate}</div>
+                                                    <div className="col">
+                                                        <div className="btn-group" role="group" aria-label="Basic example">
+                                                            <button className="btn btn-outline-primary">Crear</button>
+                                                            <Link
+                                                                className="btn btn-outline-success mx-0"                                                   
+                                                                to={`/Updateticket/${iticket.idticket}`}
+                                                            >Actualizar</Link>
+                                                            <button type="submit"
+                                                                className="btn btn-outline-danger"
+                                                                onClick={(e) => deleteTicket(e, iticket.idticket)}
+                                                            > Eliminar</button>
                                                         </div>
                                                     </div>
-                                            )}
-                                        </div>
+                                                </div>
+                                        )}
+
                                     </div>
+                                </div>
                             )}
                         </div>
                     </div>
-
                 </main>
                 <Footer />
             </div>

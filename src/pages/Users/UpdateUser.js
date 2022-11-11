@@ -20,7 +20,11 @@ const UpdateUser = () => {
         loadUser();
     }, [id]);
 
-    const { register, handleSubmit } = useForm();
+    const { register, watch, handleSubmit } = useForm();
+
+    const watchAllFields = watch();
+
+    console.log("watchAllFields", watchAllFields);
 
     const onSubmit = async (data) => {
         await swal({
