@@ -23,7 +23,7 @@ const Navbar = ({ page }) => {
                         <li className="nav-item">
                             <Link className={`nav-link ${page === "ListTickets" ? "active" : ""}`} to={"/Listt"}>Tickets</Link>
                         </li>
-                        <li className="nav-item"><Link type="button" class="btn btn-outline-primary border border-light" onClick={onClick}>Cerrar sesión</Link></li>
+                        <li className="nav-item"><Link type="button" className="btn btn-outline-primary border border-light" onClick={onClick}>Cerrar sesión</Link></li>
                     </ul>
                     
                 </div>
