@@ -106,7 +106,7 @@ const Login = () => {
                             </div>
                         </div>
                         <div className="col-sm-6 px-0 d-none d-sm-block">
-                            <img src="../Tickets-icon.png" alt="Login" className="w-100 vh-100" style={{ objectFit: 'cover', objectPosition: 'left' }} />
+                            <img src="../Tickets-icon.png" alt="Login" className="w-80 vh-80" style={{ objectFit: 'cover', objectPosition: 'left' }} />
                         </div>
                     </div>
                 </div>
