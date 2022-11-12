@@ -17,6 +17,13 @@ const ListTickets = () => {
 
     const [tickets, setTikets] = useState([]);
 
+    const [idUser, setIdUset] = useState();
+
+    const onClick = (e, id)=>{
+        setIdUset(id);
+    }
+    
+
     const showTickets = async () => {
         const response = await APIInvoke.invokeGET("/tickets/ticketlist");
         setTikets(response);
@@ -103,7 +110,7 @@ const ListTickets = () => {
                                                     <div className="collapse" id={`colapsed${index2}`}>
                                                         <div className="card card-body">
                                                             <div className="btn-group" role="group" aria-label="Basic example">
-                                                                <button className="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                                                <button className="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={(e)=>(onClick(e, item._id))}>
                                                                     <img src="../icons8-create-order-32.png" alt="Crea" />
                                                                 </button>
                                                                 <Link
@@ -129,8 +136,8 @@ const ListTickets = () => {
                             )}
                         </div>
 
-                        <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                             <NewTicket />
+                        <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                             <NewTicket idUser={idUser}/>
                         </div>
                     </div>
 
