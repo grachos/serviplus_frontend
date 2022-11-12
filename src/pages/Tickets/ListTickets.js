@@ -9,9 +9,11 @@ import Navbar from "../../components/Header";
 import Footer from "../../components/Footer";
 import APIInvoke from "../../utils/APIInvoke";
 import swal from "sweetalert";
-//import { useForm } from "react-hook-form";
+import NewTicket from "./NewTicket";
+
 
 const ListTickets = () => {
+
 
     const [tickets, setTikets] = useState([]);
 
@@ -101,15 +103,15 @@ const ListTickets = () => {
                                                     <div className="collapse" id={`colapsed${index2}`}>
                                                         <div className="card card-body">
                                                             <div className="btn-group" role="group" aria-label="Basic example">
-                                                                <button className="btn btn-outline-primary">
-                                                                    <img  src="../icons8-create-order-32.png" alt="Crea" />
+                                                                <button className="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                                                    <img src="../icons8-create-order-32.png" alt="Crea" />
                                                                 </button>
                                                                 <Link
                                                                     className="btn btn-outline-success mx-0"
                                                                     to={`/Updateticket/${iticket.idticket}`} alt="Actualiza"
-                                                                ><img  src="../icons8-edit-property-32.png" alt="Actualiza" /></Link>
+                                                                ><img src="../icons8-edit-property-32.png" alt="Actualiza" /></Link>
                                                                 <Link className="btn btn-outline-success mx-0" >
-                                                                    <img  src="../icons8-add-tag-32.png" alt="Asigna" />
+                                                                    <img src="../icons8-add-tag-32.png" alt="Asigna" />
                                                                 </Link>
                                                                 <button type="submit"
                                                                     className="btn btn-outline-danger"
@@ -126,7 +128,12 @@ const ListTickets = () => {
                                 </div>
                             )}
                         </div>
+
+                        <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                             <NewTicket />
+                        </div>
                     </div>
+
                 </main >
                 <Footer />
             </div >
