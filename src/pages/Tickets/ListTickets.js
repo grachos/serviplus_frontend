@@ -10,47 +10,45 @@ import Footer from "../../components/Footer";
 import APIInvoke from "../../utils/APIInvoke";
 import swal from "sweetalert";
 import NewTicket from "./NewTicket";
+import { confirm } from "react-confirm-box";
 
 
 const ListTickets = () => {
 
-
     const [tickets, setTikets] = useState([]);
-
     const [idUser, setIdUset] = useState();
+
 
     const onClick = (e, id)=>{
         setIdUset(id);
     }
-    
-
     const showTickets = async () => {
         const response = await APIInvoke.invokeGET("/tickets/ticketlist");
         setTikets(response);
     }
 
     useEffect(() => {
-        showTickets()
+        showTickets();
     }, []);
 
-    const deleteTicket = async (e, idTicket) => {
-        e.preventDefault();
-        await swal({
-            title: "¿Está seguro de eliminar el registro?",
-            text: "Una vez eliminado, no podrá recuperar el registro!",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        })
-            .then((regDelete) => {
-                if (regDelete) {
-                    swal("El registro ha sido eliminado con exito", { icon: "success" });
-                    APIInvoke.invokeDELETE("/tickets/delticket/" + idTicket);
-                    showTickets();
-                } else {
-                    swal("No se eliminó el registro!");
-                }
-            });
+    const options = {
+        labels: {
+          confirmable: "Confirmar",
+          cancellable: "Cancelar"
+        }
+      }
+
+    const deleteTicket = async (idTicket) => {
+
+        const menssage =  await confirm("¿Desea eliminar este registro?", options); 
+
+        if(menssage){
+            await APIInvoke.invokeDELETE("/tickets/delticket/" + idTicket);
+            swal("El registro ha sido eliminado con exito", { icon: "success" });
+            showTickets(); 
+        }else{
+            swal("No se eliminó el registro!");
+        }
     }
 
     //Local storage that silulates a start session
@@ -122,7 +120,7 @@ const ListTickets = () => {
                                                                 </Link>
                                                                 <button type="submit"
                                                                     className="btn btn-outline-danger"
-                                                                    onClick={(e) => deleteTicket(e, iticket.idticket)}
+                                                                    onClick={(e)=>deleteTicket(iticket.idticket)}
                                                                 ><img src="../icons8-delete-document-32.png" alt="Elimina" /></button>
                                                             </div>
                                                         </div>
