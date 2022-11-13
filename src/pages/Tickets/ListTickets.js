@@ -10,7 +10,7 @@ import Footer from "../../components/Footer";
 import APIInvoke from "../../utils/APIInvoke";
 import swal from "sweetalert";
 import NewTicket from "./NewTicket";
-import { confirm } from "react-confirm-box";
+//import { confirm } from "react-confirm-box";
 
 
 const ListTickets = () => {
@@ -19,7 +19,7 @@ const ListTickets = () => {
     const [idUser, setIdUset] = useState();
 
 
-    const onClick = (e, id)=>{
+    const onClick = (e, id) => {
         setIdUset(id);
     }
     const showTickets = async () => {
@@ -31,24 +31,30 @@ const ListTickets = () => {
         showTickets();
     }, []);
 
-    const options = {
-        labels: {
-          confirmable: "Confirmar",
-          cancellable: "Cancelar"
-        }
-      }
 
     const deleteTicket = async (idTicket) => {
 
-        const menssage =  await confirm("¿Desea eliminar este registro?", options); 
-
-        if(menssage){
-            await APIInvoke.invokeDELETE("/tickets/delticket/" + idTicket);
-            swal("El registro ha sido eliminado con exito", { icon: "success" });
-            showTickets(); 
-        }else{
-            swal("No se eliminó el registro!");
-        }
+         let sw=0;
+         await swal({
+            title: "¿Está seguro de eliminar el registro?",
+            text: "Una vez eliminado, no podrá recuperar el registro!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((regDelete) => {
+                if (regDelete) {
+                    swal("El registro ha sido eliminado con exito", { icon: "success" });
+                    sw=1;
+                } else {
+                    swal("No se eliminó el registro!");
+                    sw=0;
+                }
+            });
+            if (sw===1){
+                await APIInvoke.invokeDELETE("/tickets/delticket/" + idTicket);
+                showTickets();
+            }
     }
 
     //Local storage that silulates a start session
@@ -108,7 +114,7 @@ const ListTickets = () => {
                                                     <div className="collapse" id={`colapsed${index2}`}>
                                                         <div className="card card-body">
                                                             <div className="btn-group" role="group" aria-label="Basic example">
-                                                                <button className="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={(e)=>(onClick(e, item._id))}>
+                                                                <button className="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={(e) => (onClick(e, item._id))}>
                                                                     <img src="../icons8-create-order-32.png" alt="Crea" />
                                                                 </button>
                                                                 <Link
@@ -120,7 +126,7 @@ const ListTickets = () => {
                                                                 </Link>
                                                                 <button type="submit"
                                                                     className="btn btn-outline-danger"
-                                                                    onClick={(e)=>deleteTicket(iticket.idticket)}
+                                                                    onClick={(e) => deleteTicket(iticket.idticket)}
                                                                 ><img src="../icons8-delete-document-32.png" alt="Elimina" /></button>
                                                             </div>
                                                         </div>
@@ -135,7 +141,7 @@ const ListTickets = () => {
                         </div>
 
                         <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                             <NewTicket idUser={idUser}/>
+                            <NewTicket idUser={idUser} />
                         </div>
                     </div>
 

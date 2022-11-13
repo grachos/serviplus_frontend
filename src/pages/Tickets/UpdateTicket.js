@@ -41,7 +41,7 @@ const UpdateTicket = () => {
             startdate: startdate,
             finishdate: finishdate
         }
-
+        let sw=0;
         await swal({
             title: "¿Está seguro de actualizar el registro?",
             text: "Una vez editado, no podrá deshacer los cambios!",
@@ -52,12 +52,16 @@ const UpdateTicket = () => {
             .then((regUpdate) => {
                 if (regUpdate) {
                     swal("El registro ha editado con exito", { icon: "success" });
-                    APIInvoke.invokePUT("/tickets/updateticket/" + id, data);
+                    sw=1;
                     //console.log(request);
                 } else {
                     swal("No se editó el registro!");
+                    sw=0;
                 }
             });
+        if (sw===1){
+            await APIInvoke.invokePUT("/tickets/updateticket/" + id, data);
+        }
 
     }
 

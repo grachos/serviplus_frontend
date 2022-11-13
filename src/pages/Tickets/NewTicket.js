@@ -4,7 +4,7 @@ import APIInvoke from "../../utils/APIInvoke";
 //import { useEffect } from "react";
 //import ListTickets from "./ListTickets";
 //import { confirm } from "react-confirm-box";
-import swal from "sweetalert";
+//import swal from "sweetalert";
 //import { Navigate} from "react-router-dom";
 
 const NewTicket = ({ idUser}) => {
@@ -16,10 +16,8 @@ const NewTicket = ({ idUser}) => {
     const [startdate, setSDateTikets] = useState();
     const [finishdate, setFDateTikets] = useState();
 
-
-
     const onSubmit = async (e) => {
-        e.preventDefault();
+        //e.preventDefault();
         const data = {
             idticket: idticket,
             ticketdescript: ticketdescript,
@@ -29,7 +27,6 @@ const NewTicket = ({ idUser}) => {
             finishdate: finishdate
         }
         await APIInvoke.invokePUT("/tickets/newticket/" + idUser, data);
-        swal("El registro ha sido actualizado con exito", { icon: "success" });
     }
 
     return (

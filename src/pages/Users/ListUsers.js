@@ -9,7 +9,6 @@ import APIInvoke from "../../utils/APIInvoke";
 import Navbar from "../../components/Header";
 import Footer from "../../components/Footer";
 import swal from "sweetalert";
-import { confirm } from "react-confirm-box";
 
 const ListUsers = () => {
     const [users, setUsers] = useState([]);
@@ -22,24 +21,29 @@ const ListUsers = () => {
     useEffect(() => {
         showUsers()
     }, []);
-    const options = {
-        labels: {
-          confirmable: "Confirmar",
-          cancellable: "Cancelar"
-        }
-      }
-
+    
     const deleteUser = async (e, id) => {
-        const menssage =  await confirm("¿Desea eliminar este registro?", options); 
-
-        if(menssage){
-            await APIInvoke.invokeDELETE("/tickets/deluser/" + id);
-            swal("El registro ha sido eliminado con exito", { icon: "success" });
-            showUsers(); 
-        }else{
-            swal("No se eliminó el registro!");
-        }
-
+        let sw=0;
+        await swal({
+           title: "¿Está seguro de eliminar el registro?",
+           text: "Una vez eliminado, no podrá recuperar el registro!",
+           icon: "warning",
+           buttons: true,
+           dangerMode: true,
+       })
+           .then((regDelete) => {
+               if (regDelete) {
+                   swal("El registro ha sido eliminado con exito", { icon: "success" });
+                   sw=1;
+               } else {
+                   swal("No se eliminó el registro!");
+                   sw=0;
+               }
+           });
+           if (sw===1){
+                await APIInvoke.invokeDELETE("/tickets/deluser/" + id);
+                showUsers();
+           }
     }
 
     
